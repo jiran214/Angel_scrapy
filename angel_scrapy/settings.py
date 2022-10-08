@@ -13,7 +13,7 @@ BOT_NAME = 'angel_scrapy'
 SPIDER_MODULES = ['angel_scrapy.spiders']
 NEWSPIDER_MODULE = 'angel_scrapy.spiders'
 
-LOG_LEVEL = 'Info'
+LOG_LEVEL = 'INFO'
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 # USER_AGENT = 'angel_scrapy (+http://www.yourdomain.com)'
 

@@ -50,8 +50,9 @@ class CompanySpider(scrapy.Spider):
             self.logger.warn('%s关键词没有匹配到company' % keyword)
             # redis 缓存 或者保存到本地
             PATH = 'D:/mypro/scrpay_pro/angel/angel_scrapy/log/waitKeyword.txt'
-            with open(file= PATH , mode='w') as f:
-                f.write(keyword)
+            with open(file= PATH , mode='a') as f:
+                f.write(keyword+';')
+                f.close()
 
     def company_parse(self, response):
         div = response.xpath('//div[@class="styles_wrapper__J5pNi"]')
@@ -100,15 +101,17 @@ class CompanySpider(scrapy.Spider):
         company_item['company_type'] = company_type
         company_item['market'] = market
 
+        print('logo:', logo,
+              '\nname:', name,
+              '\ndes:', des,
+              '\noverview:', overview,
+              '\nwebsite:', website,
+              '\nLocations:', locations,
+              '\ncompany_size:', company_size,
+              '\ntotal_raised:', total_raised,
+              '\ncompany_type:', company_type,
+              '\nmarket:', market, )
+
         yield company_item
 
-        # print('logo:', logo,
-        #       '\nname:', name,
-        #       '\ndes:', des,
-        #       '\noverview:', overview,
-        #       '\nwebsite:', website,
-        #       '\nLocations:', locations,
-        #       '\ncompany_size:', company_size,
-        #       '\ntotal_raised:', total_raised,
-        #       '\ncompany_type:', company_type,
-        #       '\nmarket:', market, )
+

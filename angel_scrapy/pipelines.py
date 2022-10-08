@@ -1,8 +1,9 @@
+import requests
 import scrapy
 from itemadapter import ItemAdapter
 import pymongo
 # from scrapy.pipelines.images import ImagesPipeline
-import requests
+# import requests
 
 class AngelPipeline:
     """
@@ -22,7 +23,7 @@ class AngelPipeline:
         collection = self.db[item.collection]
 
         try:
-            collection.update({'name': item['name']}, {'$set': dict(item)}, True)  # company 重复则更新
+            collection.update_one({'name': item['name']}, {'$set': dict(item)}, True)  # company 重复则更新
             spider.logger.info('%s插入或更新数据' % item['name'])
         except Exception as e:
             spider.logger.error('%s管道-插入或更新错误-%s' % spider.name,e)
